@@ -30,7 +30,7 @@ export default function Contact() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
                   <label htmlFor="nombre" className="block text-sm font-medium text-dark mb-1.5">
-                    Nombre <span className="text-primary">*</span>
+                    Nombre o razón social <span className="text-primary">*</span>
                   </label>
                   <input
                     type="text"
@@ -38,7 +38,7 @@ export default function Contact() {
                     name="nombre"
                     required
                     className="w-full px-4 py-3 rounded-lg border border-neutral/30 bg-white text-dark placeholder:text-neutral/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
-                    placeholder="Tu nombre completo"
+                    placeholder="Nombre o razón social de la empresa"
                   />
                 </div>
                 <div>
@@ -142,7 +142,7 @@ export default function Contact() {
                   Productos de interés
                 </p>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                  {["Galletas de Agua", "Panes de Molde", "Panes Artesanales", "Bollería", "Pastelería", "Tortas para Eventos"].map((producto) => (
+                  {["Galletas de Agua", "Panes Clásicos", "Panes de Molde", "Panes Especiales", "Panes Embolsados", "Pastelería"].map((producto) => (
                     <label key={producto} className="flex items-center gap-2 text-sm text-dark cursor-pointer">
                       <input
                         type="checkbox"

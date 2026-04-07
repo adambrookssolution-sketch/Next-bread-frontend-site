@@ -3,13 +3,18 @@
 import { useState } from "react";
 import Container from "@/app/components/ui/Container";
 import SectionHeading from "@/app/components/ui/SectionHeading";
-import { LOCATIONS } from "@/app/lib/constants";
+import { LOCATIONS, type Location } from "@/app/lib/constants";
 
 export default function Locations() {
   const [activeLocation, setActiveLocation] = useState(0);
 
-  const getEmbedUrl = (address: string) =>
-    `https://maps.google.com/maps?q=${encodeURIComponent(address)}&t=&z=16&ie=UTF8&iwloc=&output=embed`;
+  const getEmbedUrl = (loc: Location) => {
+    if (loc.coords) {
+      const { lat, lng } = loc.coords;
+      return `https://maps.google.com/maps?q=${lat},${lng}&t=&z=17&ie=UTF8&iwloc=&output=embed`;
+    }
+    return `https://maps.google.com/maps?q=${encodeURIComponent(loc.address)}&t=&z=16&ie=UTF8&iwloc=&output=embed`;
+  };
 
   return (
     <section id="locales" className="py-20 lg:py-28 bg-white">
@@ -24,7 +29,7 @@ export default function Locations() {
           <div className="relative aspect-square lg:aspect-auto lg:min-h-[500px] rounded-lg overflow-hidden border border-neutral/20">
             <iframe
               key={activeLocation}
-              src={getEmbedUrl(LOCATIONS[activeLocation].address)}
+              src={getEmbedUrl(LOCATIONS[activeLocation])}
               className="absolute inset-0 w-full h-full"
               style={{ border: 0 }}
               allowFullScreen

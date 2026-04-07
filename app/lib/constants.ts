@@ -31,13 +31,14 @@ export interface Location {
   mapsUrl: string;
   mapsShareUrl: string;
   embedQuery: string;
+  coords?: { lat: number; lng: number };
 }
 
 export const LOCATIONS: Location[] = [
   {
     id: "grocio-prado",
     name: "Panadería Nestarez",
-    address: "Av Grocio Prado Nº608, Chincha Alta 11701",
+    address: "Av Grocio Prado Nº608, Pueblo Nuevo 11701",
     phone: "956660316",
     hours: [
       "Lunes a Sábado: 5:30 - 21:30",
@@ -45,7 +46,8 @@ export const LOCATIONS: Location[] = [
     ],
     mapsUrl: "https://maps.app.goo.gl/k8Kooa3FmiKbPWP86",
     mapsShareUrl: "https://share.google/9rigFnIBkHhXGXSyx",
-    embedQuery: "Panadería+Nestarez+Av+Grocio+Prado+608+Chincha+Alta",
+    embedQuery: "Panadería+Nestarez+Av+Grocio+Prado+608+Pueblo+Nuevo+Chincha",
+    coords: { lat: -13.4054193, lng: -76.1264098 },
   },
   {
     id: "sucre",

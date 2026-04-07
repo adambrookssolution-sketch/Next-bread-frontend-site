@@ -10,6 +10,7 @@
 
 html {
   scroll-behavior: smooth;
+  color-scheme: light;
 }
 
 body {
@@ -18,6 +19,19 @@ body {
   background: #ffffff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Force light appearance regardless of OS dark mode preference.
+   The brand identity is built around warm light tones; auto-inverted
+   dark mode would break logo visibility and section contrast. */
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: light;
+  }
+  body {
+    color: var(--color-dark);
+    background: #ffffff;
+  }
 }
 
 ::selection {
