@@ -3,6 +3,7 @@ import { laborUnion, libreCaslon, lexend, abuget } from "./lib/fonts";
 import { BRAND } from "./lib/constants";
 import JsonLd from "./components/JsonLd";
 import { GoogleTagManager, GoogleTagManagerNoscript } from "./components/Analytics";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -58,6 +59,7 @@ export default function RootLayout({
         <GoogleTagManagerNoscript />
         <JsonLd />
         {children}
+        <Analytics />
       </body>
     </html>
   );
