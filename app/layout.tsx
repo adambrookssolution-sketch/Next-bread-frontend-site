@@ -54,6 +54,10 @@ export default function RootLayout({
       lang="es"
       className={`${laborUnion.variable} ${libreCaslon.variable} ${lexend.variable} ${abuget.variable}`}
     >
+      <head>
+        <meta name="color-scheme" content="light only" />
+        <meta name="supported-color-schemes" content="light only" />
+      </head>
       <body>
         <GoogleTagManager />
         <GoogleTagManagerNoscript />

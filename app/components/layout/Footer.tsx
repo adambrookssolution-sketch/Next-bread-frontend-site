@@ -54,7 +54,7 @@ export default function Footer() {
                     rel="noopener noreferrer"
                     className="text-sm text-neutral hover:text-white transition-colors"
                   >
-                    {loc.address.split(",")[0]}
+                    {loc.address.replace(/\s*\d{5}$/, "").replace(",", " -")}
                   </a>
                 </li>
               ))}

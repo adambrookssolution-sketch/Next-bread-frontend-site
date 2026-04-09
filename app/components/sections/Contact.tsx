@@ -4,7 +4,7 @@ import { useActionState } from "react";
 import Container from "@/app/components/ui/Container";
 import SectionHeading from "@/app/components/ui/SectionHeading";
 import Button from "@/app/components/ui/Button";
-import { BRAND, LOCATIONS } from "@/app/lib/constants";
+import { BRAND } from "@/app/lib/constants";
 import { submitContactForm, type ContactFormState } from "@/app/lib/actions";
 
 const initialState: ContactFormState = {
@@ -56,84 +56,18 @@ export default function Contact() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div>
-                  <label htmlFor="celular" className="block text-sm font-medium text-dark mb-1.5">
-                    Celular <span className="text-primary">*</span>
-                  </label>
-                  <input
-                    type="tel"
-                    id="celular"
-                    name="celular"
-                    required
-                    className="w-full px-4 py-3 rounded-lg border border-neutral/30 bg-white text-dark placeholder:text-neutral/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
-                    placeholder="956 660 316"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="fechaNacimiento" className="block text-sm font-medium text-dark mb-1.5">
-                    Fecha de Nacimiento
-                  </label>
-                  <input
-                    type="date"
-                    id="fechaNacimiento"
-                    name="fechaNacimiento"
-                    className="w-full px-4 py-3 rounded-lg border border-neutral/30 bg-white text-dark placeholder:text-neutral/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
-                  />
-                </div>
-              </div>
-
               <div>
-                <label htmlFor="direccion" className="block text-sm font-medium text-dark mb-1.5">
-                  Dirección
+                <label htmlFor="celular" className="block text-sm font-medium text-dark mb-1.5">
+                  Celular <span className="text-primary">*</span>
                 </label>
                 <input
-                  type="text"
-                  id="direccion"
-                  name="direccion"
+                  type="tel"
+                  id="celular"
+                  name="celular"
+                  required
                   className="w-full px-4 py-3 rounded-lg border border-neutral/30 bg-white text-dark placeholder:text-neutral/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
-                  placeholder="Tu dirección"
+                  placeholder="956 660 316"
                 />
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                {/* Local de preferencia */}
-                <div>
-                  <label htmlFor="localPreferencia" className="block text-sm font-medium text-dark mb-1.5">
-                    Local de preferencia
-                  </label>
-                  <select
-                    id="localPreferencia"
-                    name="localPreferencia"
-                    className="w-full px-4 py-3 rounded-lg border border-neutral/30 bg-white text-dark focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
-                  >
-                    <option value="">Selecciona un local</option>
-                    {LOCATIONS.map((loc) => (
-                      <option key={loc.id} value={loc.id}>
-                        {loc.address.split(",")[0]}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                {/* ¿Cómo nos conociste? */}
-                <div>
-                  <label htmlFor="comoNosConociste" className="block text-sm font-medium text-dark mb-1.5">
-                    ¿Cómo nos conociste?
-                  </label>
-                  <select
-                    id="comoNosConociste"
-                    name="comoNosConociste"
-                    className="w-full px-4 py-3 rounded-lg border border-neutral/30 bg-white text-dark focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
-                  >
-                    <option value="">Selecciona una opción</option>
-                    <option value="redes-sociales">Redes sociales</option>
-                    <option value="recomendacion">Recomendación</option>
-                    <option value="google">Google</option>
-                    <option value="pasando-por-la-calle">Pasando por la calle</option>
-                    <option value="otro">Otro</option>
-                  </select>
-                </div>
               </div>
 
               {/* Productos de interés */}

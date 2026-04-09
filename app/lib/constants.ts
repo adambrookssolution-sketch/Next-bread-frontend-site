@@ -38,7 +38,7 @@ export const LOCATIONS: Location[] = [
   {
     id: "grocio-prado",
     name: "Panadería Nestarez",
-    address: "Av Grocio Prado Nº608, Pueblo Nuevo 11701",
+    address: "Av. Grocio Prado 608, Pueblo Nuevo 11701",
     phone: "956660316",
     hours: [
       "Lunes a Sábado: 5:30 - 21:30",
