@@ -6,6 +6,16 @@
   --color-secondary: #503220;
   --color-neutral: #B3A69E;
   --color-dark: #2C2929;
+  --animate-scroll: scroll 30s linear infinite;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 html {

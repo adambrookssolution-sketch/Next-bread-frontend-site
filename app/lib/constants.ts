@@ -268,6 +268,35 @@ export const ABOUT = {
   ],
 } as const;
 
+export interface Client {
+  id: string;
+  name: string;
+  logo: string;
+}
+
+export const CLIENTS: Client[] = [
+  {
+    id: "la-calera",
+    name: "La Calera Agrícola",
+    logo: "/images/clients/la-calera.jpeg",
+  },
+  {
+    id: "comertesa",
+    name: "COMERTESA - Comercial Tres Estrellas S.A.",
+    logo: "/images/clients/comertesa.jpeg",
+  },
+  {
+    id: "farma-claudia",
+    name: "Farma Claudia",
+    logo: "/images/clients/farma-claudia.jpeg",
+  },
+  {
+    id: "clinica-famisalud",
+    name: "Clínica FamiSalud",
+    logo: "/images/clients/clinica-famisalud.jpeg",
+  },
+];
+
 export const NAV_LINKS = [
   { label: "Inicio", href: "#inicio" },
   { label: "Productos", href: "#productos" },
