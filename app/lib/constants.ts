@@ -272,7 +272,6 @@ export interface Client {
   id: string;
   name: string;
   logo: string;
-  darkBg?: boolean;
 }
 
 export const CLIENTS: Client[] = [
@@ -282,21 +281,24 @@ export const CLIENTS: Client[] = [
     logo: "/images/clients/la-calera.jpeg",
   },
   {
-    id: "comertesa",
-    name: "COMERTESA - Comercial Tres Estrellas S.A.",
-    logo: "/images/clients/comertesa.jpeg",
-    darkBg: true,
-  },
-  {
     id: "farma-claudia",
     name: "Farma Claudia",
     logo: "/images/clients/farma-claudia.jpeg",
   },
   {
-    id: "clinica-famisalud",
-    name: "Clínica FamiSalud",
-    logo: "/images/clients/clinica-famisalud.jpeg",
-    darkBg: true,
+    id: "diamond-bridge",
+    name: "Diamond Bridge",
+    logo: "/images/clients/diamond-bridge.jpeg",
+  },
+  {
+    id: "municipalidad-chincha-baja",
+    name: "Municipalidad Distrital de Chincha Baja",
+    logo: "/images/clients/municipalidad-chincha-baja.jpeg",
+  },
+  {
+    id: "neo-mg-group",
+    name: "NEO MG Group S.A.C.",
+    logo: "/images/clients/neo-mg-group.jpeg",
   },
 ];
 
