@@ -300,6 +300,16 @@ export const CLIENTS: Client[] = [
     name: "NEO MG Group S.A.C.",
     logo: "/images/clients/neo-mg-group.jpeg",
   },
+  {
+    id: "comertesa",
+    name: "COMERTESA - Comercial Tres Estrellas S.A.",
+    logo: "/images/clients/comertesa.jpeg",
+  },
+  {
+    id: "clinica-famisalud",
+    name: "Clínica FamiSalud",
+    logo: "/images/clients/clinica-famisalud.jpeg",
+  },
 ];
 
 export const NAV_LINKS = [
