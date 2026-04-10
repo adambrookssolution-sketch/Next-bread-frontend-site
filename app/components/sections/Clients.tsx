@@ -26,18 +26,18 @@ export default function Clients() {
         <div className="pointer-events-none absolute inset-y-0 right-0 w-20 sm:w-32 bg-gradient-to-l from-dark to-transparent z-10" />
 
         {/* Scrolling track */}
-        <div className="flex items-center gap-12 sm:gap-16 animate-scroll hover:[animation-play-state:paused]">
+        <div className="flex items-center gap-8 sm:gap-12 animate-scroll hover:[animation-play-state:paused]">
           {items.map((client, i) => (
             <div
               key={`${client.id}-${i}`}
-              className="flex-shrink-0 flex items-center justify-center w-36 h-24 sm:w-44 sm:h-28 rounded-lg bg-white/10 p-4 sm:p-5 transition-all duration-300 hover:bg-white/20"
+              className="flex-shrink-0 flex items-center justify-center w-40 h-28 sm:w-48 sm:h-32 rounded-xl bg-white p-5 sm:p-6 shadow-lg transition-all duration-300 hover:scale-105"
             >
               <Image
                 src={client.logo}
                 alt={client.name}
-                width={160}
-                height={80}
-                className="max-h-full w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity"
+                width={180}
+                height={100}
+                className="max-h-full max-w-full w-auto h-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
               />
             </div>
           ))}
