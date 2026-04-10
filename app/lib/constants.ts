@@ -272,6 +272,7 @@ export interface Client {
   id: string;
   name: string;
   logo: string;
+  darkBg?: boolean;
 }
 
 export const CLIENTS: Client[] = [
@@ -284,6 +285,7 @@ export const CLIENTS: Client[] = [
     id: "comertesa",
     name: "COMERTESA - Comercial Tres Estrellas S.A.",
     logo: "/images/clients/comertesa.jpeg",
+    darkBg: true,
   },
   {
     id: "farma-claudia",
@@ -294,6 +296,7 @@ export const CLIENTS: Client[] = [
     id: "clinica-famisalud",
     name: "Clínica FamiSalud",
     logo: "/images/clients/clinica-famisalud.jpeg",
+    darkBg: true,
   },
 ];
 

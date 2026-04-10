@@ -30,7 +30,9 @@ export default function Clients() {
           {items.map((client, i) => (
             <div
               key={`${client.id}-${i}`}
-              className="flex-shrink-0 flex items-center justify-center w-40 h-28 sm:w-48 sm:h-32 rounded-xl bg-white p-5 sm:p-6 shadow-lg transition-all duration-300 hover:scale-105"
+              className={`flex-shrink-0 flex items-center justify-center w-40 h-28 sm:w-48 sm:h-32 rounded-xl p-5 sm:p-6 shadow-lg transition-all duration-300 hover:scale-105 ${
+                client.darkBg ? "bg-neutral/30" : "bg-white"
+              }`}
             >
               <Image
                 src={client.logo}
