@@ -3,11 +3,15 @@
 import Image from "next/image";
 import Container from "@/app/components/ui/Container";
 import SectionHeading from "@/app/components/ui/SectionHeading";
-import { CLIENTS } from "@/app/lib/constants";
+import type { CmsClient } from "@/app/lib/contentful";
 
-export default function Clients() {
+interface ClientsProps {
+  clients: CmsClient[];
+}
+
+export default function Clients({ clients }: ClientsProps) {
   // Duplicate the list to create seamless infinite scroll
-  const items = [...CLIENTS, ...CLIENTS];
+  const items = [...clients, ...clients];
 
   return (
     <section className="py-20 lg:py-28 bg-dark">

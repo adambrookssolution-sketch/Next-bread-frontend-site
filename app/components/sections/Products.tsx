@@ -4,16 +4,23 @@ import { useState } from "react";
 import Image from "next/image";
 import Container from "@/app/components/ui/Container";
 import SectionHeading from "@/app/components/ui/SectionHeading";
-import { PRODUCTS, PRODUCT_CATEGORIES } from "@/app/lib/constants";
+import type { CmsProduct } from "@/app/lib/contentful";
 
-export default function Products() {
+const CATEGORY_ORDER = ["Panes Clásicos", "Panes de Molde", "Panes Especiales", "Panes Embolsados", "Pastelería"];
+
+interface ProductsProps {
+  products: CmsProduct[];
+}
+
+export default function Products({ products }: ProductsProps) {
   const [activeCategory, setActiveCategory] = useState("Todos");
 
-  const bestSeller = PRODUCTS.find((p) => p.bestSeller);
+  const categories = ["Todos", ...CATEGORY_ORDER.filter((c) => products.some((p) => p.category === c))];
+  const bestSeller = products.find((p) => p.bestSeller);
   const filtered =
     activeCategory === "Todos"
-      ? PRODUCTS.filter((p) => !p.bestSeller)
-      : PRODUCTS.filter(
+      ? products.filter((p) => !p.bestSeller)
+      : products.filter(
           (p) => p.category === activeCategory && !p.bestSeller
         );
 
@@ -62,7 +69,7 @@ export default function Products() {
 
         {/* Category filter tabs */}
         <div className="flex flex-wrap justify-center gap-2 mb-10">
-          {PRODUCT_CATEGORIES.map((cat) => (
+          {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
@@ -75,7 +82,7 @@ export default function Products() {
               {cat}
               {cat !== "Todos" && (
                 <span className="ml-1.5 text-xs opacity-70">
-                  ({PRODUCTS.filter((p) => p.category === cat && !p.bestSeller).length})
+                  ({products.filter((p) => p.category === cat && !p.bestSeller).length})
                 </span>
               )}
             </button>

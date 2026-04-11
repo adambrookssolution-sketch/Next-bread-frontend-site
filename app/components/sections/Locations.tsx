@@ -3,12 +3,16 @@
 import { useState } from "react";
 import Container from "@/app/components/ui/Container";
 import SectionHeading from "@/app/components/ui/SectionHeading";
-import { LOCATIONS, type Location } from "@/app/lib/constants";
+import type { CmsLocation } from "@/app/lib/contentful";
 
-export default function Locations() {
+interface LocationsProps {
+  locations: CmsLocation[];
+}
+
+export default function Locations({ locations }: LocationsProps) {
   const [activeLocation, setActiveLocation] = useState(0);
 
-  const getEmbedUrl = (loc: Location) => {
+  const getEmbedUrl = (loc: CmsLocation) => {
     if (loc.coords) {
       const { lat, lng } = loc.coords;
       return `https://maps.google.com/maps?q=${lat},${lng}&t=&z=17&ie=UTF8&iwloc=&output=embed`;
@@ -29,19 +33,19 @@ export default function Locations() {
           <div className="relative aspect-square lg:aspect-auto lg:min-h-[500px] rounded-lg overflow-hidden border border-neutral/20">
             <iframe
               key={activeLocation}
-              src={getEmbedUrl(LOCATIONS[activeLocation])}
+              src={getEmbedUrl(locations[activeLocation])}
               className="absolute inset-0 w-full h-full"
               style={{ border: 0 }}
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title={`Ubicación de ${LOCATIONS[activeLocation].name} — ${LOCATIONS[activeLocation].address}`}
+              title={`Ubicación de ${locations[activeLocation].name} — ${locations[activeLocation].address}`}
             />
           </div>
 
           {/* Location cards */}
           <div className="space-y-4">
-            {LOCATIONS.map((location, index) => (
+            {locations.map((location, index) => (
               <button
                 key={location.id}
                 type="button"

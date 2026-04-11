@@ -2,6 +2,7 @@ import Image from "next/image";
 import Container from "@/app/components/ui/Container";
 import SectionHeading from "@/app/components/ui/SectionHeading";
 import { ABOUT } from "@/app/lib/constants";
+import type { CmsAbout } from "@/app/lib/contentful";
 
 const valueIcons = [
   // Pasión Artesanal
@@ -22,7 +23,11 @@ const valueIcons = [
   </svg>,
 ];
 
-export default function About() {
+interface AboutProps {
+  about: CmsAbout;
+}
+
+export default function About({ about }: AboutProps) {
   return (
     <section id="nosotros" className="py-20 lg:py-28 bg-primary-light/30">
       <Container>
@@ -47,7 +52,7 @@ export default function About() {
               Nuestra Misión
             </h3>
             <p className="text-neutral leading-relaxed text-lg">
-              {ABOUT.mision}
+              {about.mision}
             </p>
           </div>
         </div>
@@ -58,7 +63,7 @@ export default function About() {
               Nuestra Visión
             </h3>
             <p className="text-neutral leading-relaxed text-lg">
-              {ABOUT.vision}
+              {about.vision}
             </p>
           </div>
           <div className="relative aspect-[4/3] rounded-lg overflow-hidden order-1 lg:order-2">
