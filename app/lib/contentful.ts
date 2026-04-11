@@ -35,6 +35,7 @@ export interface CmsProduct {
 export async function getProducts(): Promise<CmsProduct[]> {
   const res = await getClient().getEntries({
     content_type: "product",
+    "fields.visible": true,
     order: ["fields.order"],
     limit: 100,
     include: 1,
@@ -67,6 +68,7 @@ export interface CmsLocation {
 export async function getLocations(): Promise<CmsLocation[]> {
   const res = await getClient().getEntries({
     content_type: "location",
+    "fields.visible": true,
     order: ["fields.order"],
     limit: 20,
   });
@@ -101,6 +103,7 @@ export interface CmsClient {
 export async function getClients(): Promise<CmsClient[]> {
   const res = await getClient().getEntries({
     content_type: "client",
+    "fields.visible": true,
     order: ["fields.order"],
     limit: 50,
     include: 1,
@@ -165,5 +168,29 @@ export async function getAbout(): Promise<CmsAbout> {
   return {
     mision: item.fields.mision as string,
     vision: item.fields.vision as string,
+  };
+}
+
+// ============ HERO SECTION ============
+
+export interface CmsHero {
+  tagline: string;
+  subtitle: string;
+  ctaText: string;
+  ctaWhatsappText: string;
+}
+
+export async function getHero(): Promise<CmsHero> {
+  const res = await getClient().getEntries({
+    content_type: "heroSection",
+    limit: 1,
+  });
+
+  const item = res.items[0];
+  return {
+    tagline: (item.fields.tagline as string) || "Tradición artesanal en cada bocado",
+    subtitle: (item.fields.subtitle as string) || "panaderia y pastelería",
+    ctaText: (item.fields.ctaText as string) || "Ver Productos",
+    ctaWhatsappText: (item.fields.ctaWhatsappText as string) || "Escríbenos",
   };
 }

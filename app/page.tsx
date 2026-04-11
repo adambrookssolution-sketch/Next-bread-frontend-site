@@ -6,23 +6,24 @@ import About from "@/app/components/sections/About";
 import Locations from "@/app/components/sections/Locations";
 import Clients from "@/app/components/sections/Clients";
 import Contact from "@/app/components/sections/Contact";
-import { getProducts, getLocations, getClients, getAbout } from "@/app/lib/contentful";
+import { getProducts, getLocations, getClients, getAbout, getHero } from "@/app/lib/contentful";
 
 export const revalidate = 60;
 
 export default async function Home() {
-  const [products, locations, clients, about] = await Promise.all([
+  const [products, locations, clients, about, hero] = await Promise.all([
     getProducts(),
     getLocations(),
     getClients(),
     getAbout(),
+    getHero(),
   ]);
 
   return (
     <>
       <Header />
       <main>
-        <Hero />
+        <Hero hero={hero} />
         <Products products={products} />
         <About about={about} />
         <Locations locations={locations} />
