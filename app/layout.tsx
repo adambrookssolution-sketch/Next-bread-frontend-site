@@ -57,6 +57,7 @@ export default function RootLayout({
       <head>
         <meta name="color-scheme" content="light only" />
         <meta name="supported-color-schemes" content="light only" />
+        <meta name="darkreader-lock" />
       </head>
       <body>
         <GoogleTagManager />

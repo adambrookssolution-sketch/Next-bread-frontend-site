@@ -48,3 +48,9 @@ body {
   background-color: #A92829;
   color: #ffffff;
 }
+
+/* Block Dark Reader and other forced dark mode extensions */
+html, body, header, main, footer, section, nav {
+  forced-color-adjust: none;
+  color-scheme: light only !important;
+}
