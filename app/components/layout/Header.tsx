@@ -2,10 +2,15 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { NAV_LINKS, BRAND } from "@/app/lib/constants";
+import { NAV_LINKS } from "@/app/lib/constants";
 import Container from "@/app/components/ui/Container";
+import type { CmsBrand } from "@/app/lib/contentful";
 
-export default function Header() {
+interface HeaderProps {
+  brand: CmsBrand;
+}
+
+export default function Header({ brand }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -40,7 +45,7 @@ export default function Header() {
           <a href="#inicio" className="shrink-0">
             <Image
               src={isScrolled ? "/logo/header-logo-red.svg" : "/logo/header-logo-white.svg"}
-              alt={BRAND.fullName}
+              alt={brand.fullName}
               width={180}
               height={30}
               className="h-7 sm:h-9 w-auto"
@@ -66,7 +71,7 @@ export default function Header() {
 
           {/* WhatsApp CTA (desktop) */}
           <a
-            href={BRAND.whatsappLink}
+            href={brand.whatsappLink}
             target="_blank"
             rel="noopener noreferrer"
             className="hidden lg:inline-flex items-center gap-2 bg-[#25D366] text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-[#1da851] transition-colors"
@@ -104,7 +109,7 @@ export default function Header() {
           <nav className="flex flex-col items-center justify-center h-full gap-8">
             <Image
               src="/logo/isologo-red.svg"
-              alt={BRAND.name}
+              alt={brand.name}
               width={60}
               height={60}
               className="mb-4"
@@ -120,7 +125,7 @@ export default function Header() {
               </a>
             ))}
             <a
-              href={BRAND.whatsappLink}
+              href={brand.whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-4 inline-flex items-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#1da851] transition-colors"

@@ -6,8 +6,6 @@ import Container from "@/app/components/ui/Container";
 import SectionHeading from "@/app/components/ui/SectionHeading";
 import type { CmsProduct } from "@/app/lib/contentful";
 
-const CATEGORY_ORDER = ["Panes Clásicos", "Panes de Molde", "Panes Especiales", "Panes Embolsados", "Pastelería"];
-
 interface ProductsProps {
   products: CmsProduct[];
 }
@@ -15,7 +13,12 @@ interface ProductsProps {
 export default function Products({ products }: ProductsProps) {
   const [activeCategory, setActiveCategory] = useState("Todos");
 
-  const categories = ["Todos", ...CATEGORY_ORDER.filter((c) => products.some((p) => p.category === c))];
+  // Derive categories dynamically from products, preserving order from Contentful
+  const uniqueCategories: string[] = [];
+  for (const p of products) {
+    if (!uniqueCategories.includes(p.category)) uniqueCategories.push(p.category);
+  }
+  const categories = ["Todos", ...uniqueCategories];
   const bestSeller = products.find((p) => p.bestSeller);
   const filtered =
     activeCategory === "Todos"

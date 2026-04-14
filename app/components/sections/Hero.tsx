@@ -1,15 +1,15 @@
 import Image from "next/image";
 import Button from "@/app/components/ui/Button";
-import { BRAND } from "@/app/lib/constants";
-import type { CmsHero } from "@/app/lib/contentful";
+import type { CmsHero, CmsBrand } from "@/app/lib/contentful";
 
 /* eslint-disable @next/next/no-img-element */
 
 interface HeroProps {
   hero: CmsHero;
+  brand: CmsBrand;
 }
 
-export default function Hero({ hero }: HeroProps) {
+export default function Hero({ hero, brand }: HeroProps) {
   return (
     <section id="inicio" className="relative h-screen min-h-[600px] flex items-center">
       {/* Background image */}
@@ -35,7 +35,7 @@ export default function Hero({ hero }: HeroProps) {
         <h1 className="flex justify-center mb-4">
           <img
             src="/logo/hero-logo-white.svg"
-            alt={BRAND.fullName}
+            alt={brand.fullName}
             className="w-full max-w-[85vw] sm:max-w-xl lg:max-w-2xl h-auto"
           />
         </h1>
@@ -45,7 +45,7 @@ export default function Hero({ hero }: HeroProps) {
             {hero.ctaText}
           </Button>
           <Button
-            href={BRAND.whatsappLink}
+            href={brand.whatsappLink}
             variant="whatsapp"
             size="lg"
             external

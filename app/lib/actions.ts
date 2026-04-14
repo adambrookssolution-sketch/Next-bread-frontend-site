@@ -18,7 +18,6 @@ export async function submitContactForm(
     email: formData.get("email") as string,
     celular: formData.get("celular") as string,
     productosInteres: formData.getAll("productosInteres") as string[],
-    consentimientoWhatsapp: formData.get("consentimientoWhatsapp") === "on",
     mensaje: formData.get("mensaje") as string,
   };
 
@@ -71,10 +70,6 @@ export async function submitContactForm(
           <tr>
             <td style="padding: 8px 12px; border: 1px solid #ddd; font-weight: bold; background: #f9f9f9;">Mensaje</td>
             <td style="padding: 8px 12px; border: 1px solid #ddd;">${data.mensaje || "Sin mensaje"}</td>
-          </tr>
-          <tr>
-            <td style="padding: 8px 12px; border: 1px solid #ddd; font-weight: bold; background: #f9f9f9;">WhatsApp</td>
-            <td style="padding: 8px 12px; border: 1px solid #ddd;">${data.consentimientoWhatsapp ? "Sí, acepta recibir ofertas" : "No"}</td>
           </tr>
         </table>
         <p style="color: #999; font-size: 12px; margin-top: 16px;">Enviado desde panaderianestarez.com</p>
