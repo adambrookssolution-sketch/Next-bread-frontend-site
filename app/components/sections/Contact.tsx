@@ -4,7 +4,7 @@ import { useActionState } from "react";
 import Container from "@/app/components/ui/Container";
 import SectionHeading from "@/app/components/ui/SectionHeading";
 import Button from "@/app/components/ui/Button";
-import type { CmsBrand } from "@/app/lib/contentful";
+import type { CmsBrand, CmsCategory } from "@/app/lib/contentful";
 import { submitContactForm, type ContactFormState } from "@/app/lib/actions";
 
 const initialState: ContactFormState = {
@@ -14,9 +14,10 @@ const initialState: ContactFormState = {
 
 interface ContactProps {
   brand: CmsBrand;
+  categories: CmsCategory[];
 }
 
-export default function Contact({ brand }: ContactProps) {
+export default function Contact({ brand, categories }: ContactProps) {
   const [state, formAction, isPending] = useActionState(submitContactForm, initialState);
 
   return (
@@ -74,25 +75,27 @@ export default function Contact({ brand }: ContactProps) {
                 />
               </div>
 
-              {/* Productos de interés */}
-              <div>
-                <p className="block text-sm font-medium text-dark mb-2">
-                  Productos de interés
-                </p>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                  {["Galletas de Agua", "Panes Clásicos", "Panes de Molde", "Panes Especiales", "Panes Embolsados", "Pastelería"].map((producto) => (
-                    <label key={producto} className="flex items-center gap-2 text-sm text-dark cursor-pointer">
-                      <input
-                        type="checkbox"
-                        name="productosInteres"
-                        value={producto}
-                        className="w-4 h-4 rounded border-neutral/30 text-primary focus:ring-primary/30"
-                      />
-                      {producto}
-                    </label>
-                  ))}
+              {/* Productos de interés - sincronizado con categorías de Contentful */}
+              {categories.length > 0 && (
+                <div>
+                  <p className="block text-sm font-medium text-dark mb-2">
+                    Productos de interés
+                  </p>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    {categories.map((cat) => (
+                      <label key={cat.id} className="flex items-center gap-2 text-sm text-dark cursor-pointer">
+                        <input
+                          type="checkbox"
+                          name="productosInteres"
+                          value={cat.name}
+                          className="w-4 h-4 rounded border-neutral/30 text-primary focus:ring-primary/30"
+                        />
+                        {cat.name}
+                      </label>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
 
               <div>
                 <label htmlFor="mensaje" className="block text-sm font-medium text-dark mb-1.5">

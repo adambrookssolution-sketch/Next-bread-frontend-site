@@ -13,18 +13,20 @@ import {
   getAbout,
   getHero,
   getBrand,
+  getCategories,
 } from "@/app/lib/contentful";
 
 export const revalidate = 60;
 
 export default async function Home() {
-  const [products, locations, clients, about, hero, brand] = await Promise.all([
+  const [products, locations, clients, about, hero, brand, categories] = await Promise.all([
     getProducts(),
     getLocations(),
     getClients(),
     getAbout(),
     getHero(),
     getBrand(),
+    getCategories(),
   ]);
 
   return (
@@ -36,7 +38,7 @@ export default async function Home() {
         <About about={about} />
         <Locations locations={locations} />
         <Clients clients={clients} />
-        <Contact brand={brand} />
+        <Contact brand={brand} categories={categories} />
       </main>
       <Footer brand={brand} locations={locations} />
     </>
