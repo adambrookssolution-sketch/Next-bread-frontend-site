@@ -1,10 +1,10 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import Container from "@/app/components/ui/Container";
 import SectionHeading from "@/app/components/ui/SectionHeading";
 import Button from "@/app/components/ui/Button";
-import type { CmsBrand, CmsCategory } from "@/app/lib/contentful";
+import type { CmsBrand } from "@/app/lib/contentful";
 import { submitContactForm, type ContactFormState } from "@/app/lib/actions";
 
 const initialState: ContactFormState = {
@@ -12,13 +12,28 @@ const initialState: ContactFormState = {
   message: "",
 };
 
+const NOMBRE_MAX = 30;
+const MENSAJE_MAX = 400;
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const CELULAR_REGEX = /^9\d{8}$/;
+
 interface ContactProps {
   brand: CmsBrand;
-  categories: CmsCategory[];
+  categories: readonly string[];
 }
 
 export default function Contact({ brand, categories }: ContactProps) {
   const [state, formAction, isPending] = useActionState(submitContactForm, initialState);
+  const [nombre, setNombre] = useState("");
+  const [email, setEmail] = useState("");
+  const [celular, setCelular] = useState("");
+  const [mensaje, setMensaje] = useState("");
+
+  const nombreValid = nombre.trim().length > 0 && nombre.length <= NOMBRE_MAX;
+  const emailValid = EMAIL_REGEX.test(email);
+  const celularValid = CELULAR_REGEX.test(celular);
+  const mensajeValid = mensaje.length <= MENSAJE_MAX;
+  const formValid = nombreValid && emailValid && celularValid && mensajeValid;
 
   return (
     <section id="contacto" className="py-20 lg:py-28 bg-primary-light/30">
@@ -42,9 +57,19 @@ export default function Contact({ brand, categories }: ContactProps) {
                     id="nombre"
                     name="nombre"
                     required
-                    className="w-full px-4 py-3 rounded-lg border border-neutral/30 bg-white text-dark placeholder:text-neutral/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
+                    maxLength={NOMBRE_MAX}
+                    value={nombre}
+                    onChange={(e) => setNombre(e.target.value)}
+                    className={`w-full px-4 py-3 rounded-lg border bg-white text-dark placeholder:text-neutral/50 focus:outline-none focus:ring-2 focus:ring-primary/30 transition-colors ${
+                      nombre.length > 0 && !nombreValid
+                        ? "border-red-400"
+                        : "border-neutral/30 focus:border-primary"
+                    }`}
                     placeholder="Nombre o razón social de la empresa"
                   />
+                  <p className="mt-1 text-xs text-neutral">
+                    {nombre.length}/{NOMBRE_MAX} caracteres
+                  </p>
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-dark mb-1.5">
@@ -55,9 +80,18 @@ export default function Contact({ brand, categories }: ContactProps) {
                     id="email"
                     name="email"
                     required
-                    className="w-full px-4 py-3 rounded-lg border border-neutral/30 bg-white text-dark placeholder:text-neutral/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className={`w-full px-4 py-3 rounded-lg border bg-white text-dark placeholder:text-neutral/50 focus:outline-none focus:ring-2 focus:ring-primary/30 transition-colors ${
+                      email.length > 0 && !emailValid
+                        ? "border-red-400"
+                        : "border-neutral/30 focus:border-primary"
+                    }`}
                     placeholder="tu@email.com"
                   />
+                  {email.length > 0 && !emailValid && (
+                    <p className="mt-1 text-xs text-red-500">Ingresa un email válido</p>
+                  )}
                 </div>
               </div>
 
@@ -70,12 +104,26 @@ export default function Contact({ brand, categories }: ContactProps) {
                   id="celular"
                   name="celular"
                   required
-                  className="w-full px-4 py-3 rounded-lg border border-neutral/30 bg-white text-dark placeholder:text-neutral/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
-                  placeholder="956 660 316"
+                  inputMode="numeric"
+                  pattern="9[0-9]{8}"
+                  maxLength={9}
+                  value={celular}
+                  onChange={(e) => setCelular(e.target.value.replace(/\D/g, ""))}
+                  className={`w-full px-4 py-3 rounded-lg border bg-white text-dark placeholder:text-neutral/50 focus:outline-none focus:ring-2 focus:ring-primary/30 transition-colors ${
+                    celular.length > 0 && !celularValid
+                      ? "border-red-400"
+                      : "border-neutral/30 focus:border-primary"
+                  }`}
+                  placeholder="956660316"
                 />
+                {celular.length > 0 && !celularValid && (
+                  <p className="mt-1 text-xs text-red-500">
+                    El celular debe tener 9 dígitos y empezar con 9
+                  </p>
+                )}
               </div>
 
-              {/* Productos de interés - sincronizado con categorías de Contentful */}
+              {/* Productos de interés */}
               {categories.length > 0 && (
                 <div>
                   <p className="block text-sm font-medium text-dark mb-2">
@@ -83,14 +131,14 @@ export default function Contact({ brand, categories }: ContactProps) {
                   </p>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                     {categories.map((cat) => (
-                      <label key={cat.id} className="flex items-center gap-2 text-sm text-dark cursor-pointer">
+                      <label key={cat} className="flex items-center gap-2 text-sm text-dark cursor-pointer">
                         <input
                           type="checkbox"
                           name="productosInteres"
-                          value={cat.name}
+                          value={cat}
                           className="w-4 h-4 rounded border-neutral/30 text-primary focus:ring-primary/30"
                         />
-                        {cat.name}
+                        {cat}
                       </label>
                     ))}
                   </div>
@@ -105,9 +153,15 @@ export default function Contact({ brand, categories }: ContactProps) {
                   id="mensaje"
                   name="mensaje"
                   rows={4}
+                  maxLength={MENSAJE_MAX}
+                  value={mensaje}
+                  onChange={(e) => setMensaje(e.target.value)}
                   className="w-full px-4 py-3 rounded-lg border border-neutral/30 bg-white text-dark placeholder:text-neutral/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors resize-none"
                   placeholder="¿En qué podemos ayudarte?"
                 />
+                <p className="mt-1 text-xs text-neutral">
+                  {mensaje.length}/{MENSAJE_MAX} caracteres
+                </p>
               </div>
 
               {state.message && (
@@ -122,7 +176,13 @@ export default function Contact({ brand, categories }: ContactProps) {
                 </div>
               )}
 
-              <Button type="submit" variant="primary" size="lg" className="w-full sm:w-auto">
+              <Button
+                type="submit"
+                variant="primary"
+                size="lg"
+                className="w-full sm:w-auto"
+                disabled={!formValid || isPending}
+              >
                 {isPending ? "Enviando..." : "Enviar Mensaje"}
               </Button>
             </form>

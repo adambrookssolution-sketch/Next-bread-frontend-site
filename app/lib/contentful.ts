@@ -38,41 +38,33 @@ export async function getProducts(): Promise<CmsProduct[]> {
     "fields.visible": true,
     order: ["fields.order"],
     limit: 100,
-    include: 2,
+    include: 1,
   });
 
-  return res.items.map((item: Entry) => {
-    const catRef = item.fields.categoryRef as Entry | undefined;
-    const categoryName = (catRef?.fields?.name as string) || (item.fields.category as string) || "Sin categoría";
-    return {
-      id: item.sys.id,
-      name: item.fields.name as string,
-      category: categoryName,
-      image: assetUrl(item.fields.image as Asset),
-      description: item.fields.description as string,
-      bestSeller: (item.fields.bestSeller as boolean) || false,
-    };
-  });
-}
-
-// ============ CATEGORIES ============
-
-export interface CmsCategory {
-  id: string;
-  name: string;
-}
-
-export async function getCategories(): Promise<CmsCategory[]> {
-  const res = await getClient().getEntries({
-    content_type: "category",
-    order: ["fields.order"],
-    limit: 100,
-  });
   return res.items.map((item: Entry) => ({
     id: item.sys.id,
     name: item.fields.name as string,
+    category: (item.fields.category as string) || "",
+    image: assetUrl(item.fields.image as Asset),
+    description: item.fields.description as string,
+    bestSeller: (item.fields.bestSeller as boolean) || false,
   }));
 }
+
+// ============ CATEGORIES ============
+// Fixed list as requested by client.
+// To add/remove, update this list AND update the Contentful Product.category
+// field validation in the Content Model tab.
+
+export const CATEGORIES: readonly string[] = [
+  "Panes a Granel",
+  "Panes Embolsados",
+  "Panes de Molde",
+  "Tostadas",
+  "Galletas",
+  "Pasteleria",
+  "Pasteleria Fina",
+] as const;
 
 // ============ LOCATIONS ============
 

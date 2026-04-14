@@ -9,6 +9,7 @@ interface ButtonProps {
   type?: "button" | "submit";
   onClick?: () => void;
   external?: boolean;
+  disabled?: boolean;
 }
 
 const variants = {
@@ -37,9 +38,10 @@ export default function Button({
   type = "button",
   onClick,
   external = false,
+  disabled = false,
 }: ButtonProps) {
   const baseStyles =
-    "inline-flex items-center justify-center gap-2 font-medium rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2";
+    "inline-flex items-center justify-center gap-2 font-medium rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed";
 
   const classes = `${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`;
 
@@ -67,7 +69,7 @@ export default function Button({
   }
 
   return (
-    <button type={type} onClick={onClick} className={classes}>
+    <button type={type} onClick={onClick} disabled={disabled} className={classes}>
       {children}
     </button>
   );
