@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { laborUnion, libreCaslon, lexend, abuget } from "./lib/fonts";
 import { BRAND } from "./lib/constants";
 import JsonLd from "./components/JsonLd";
-import { GoogleTagManager, GoogleTagManagerNoscript } from "./components/Analytics";
+import { GoogleAnalytics, GoogleTagManager, GoogleTagManagerNoscript } from "./components/Analytics";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
@@ -60,6 +60,7 @@ export default function RootLayout({
         <meta name="darkreader-lock" />
       </head>
       <body>
+        <GoogleAnalytics />
         <GoogleTagManager />
         <GoogleTagManagerNoscript />
         <JsonLd />

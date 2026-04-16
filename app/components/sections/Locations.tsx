@@ -4,6 +4,7 @@ import { useState } from "react";
 import Container from "@/app/components/ui/Container";
 import SectionHeading from "@/app/components/ui/SectionHeading";
 import type { CmsLocation } from "@/app/lib/contentful";
+import { trackEvent } from "@/app/lib/gtag";
 
 interface LocationsProps {
   locations: CmsLocation[];
@@ -49,7 +50,10 @@ export default function Locations({ locations }: LocationsProps) {
               <button
                 key={location.id}
                 type="button"
-                onClick={() => setActiveLocation(index)}
+                onClick={() => {
+                  setActiveLocation(index);
+                  trackEvent("location_select", { location_name: location.address });
+                }}
                 className={`w-full text-left p-5 rounded-lg border transition-all ${
                   activeLocation === index
                     ? "border-primary bg-primary/5 shadow-sm"

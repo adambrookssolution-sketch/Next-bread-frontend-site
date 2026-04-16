@@ -49,20 +49,20 @@ export default function Button({
     const isHash = href.startsWith("#");
     if (external) {
       return (
-        <a href={href} target="_blank" rel="noopener noreferrer" className={classes}>
+        <a href={href} target="_blank" rel="noopener noreferrer" onClick={onClick} className={classes}>
           {children}
         </a>
       );
     }
     if (isHash) {
       return (
-        <a href={href} className={classes}>
+        <a href={href} onClick={onClick} className={classes}>
           {children}
         </a>
       );
     }
     return (
-      <Link href={href} className={classes}>
+      <Link href={href} onClick={onClick} className={classes}>
         {children}
       </Link>
     );

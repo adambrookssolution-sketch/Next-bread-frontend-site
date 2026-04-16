@@ -5,6 +5,7 @@ import Image from "next/image";
 import { NAV_LINKS } from "@/app/lib/constants";
 import Container from "@/app/components/ui/Container";
 import type { CmsBrand } from "@/app/lib/contentful";
+import { trackEvent } from "@/app/lib/gtag";
 
 interface HeaderProps {
   brand: CmsBrand;
@@ -74,6 +75,7 @@ export default function Header({ brand }: HeaderProps) {
             href={brand.whatsappLink}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackEvent("whatsapp_click", { location: "header" })}
             className="hidden lg:inline-flex items-center gap-2 bg-[#25D366] text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-[#1da851] transition-colors"
           >
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -128,6 +130,7 @@ export default function Header({ brand }: HeaderProps) {
               href={brand.whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackEvent("whatsapp_click", { location: "header_mobile" })}
               className="mt-4 inline-flex items-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#1da851] transition-colors"
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">

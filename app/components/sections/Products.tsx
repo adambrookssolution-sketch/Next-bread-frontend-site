@@ -5,6 +5,7 @@ import Image from "next/image";
 import Container from "@/app/components/ui/Container";
 import SectionHeading from "@/app/components/ui/SectionHeading";
 import type { CmsProduct } from "@/app/lib/contentful";
+import { trackEvent } from "@/app/lib/gtag";
 
 interface ProductsProps {
   products: CmsProduct[];
@@ -75,7 +76,10 @@ export default function Products({ products }: ProductsProps) {
           {categories.map((cat) => (
             <button
               key={cat}
-              onClick={() => setActiveCategory(cat)}
+              onClick={() => {
+                setActiveCategory(cat);
+                trackEvent("product_category_filter", { category: cat });
+              }}
               className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
                 activeCategory === cat
                   ? "bg-primary text-white shadow-md"
