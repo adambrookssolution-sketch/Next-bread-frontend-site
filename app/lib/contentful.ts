@@ -75,8 +75,6 @@ export interface CmsLocation {
   phone: string;
   hours: string[];
   mapsUrl: string;
-  mapsShareUrl: string;
-  embedQuery: string;
   coords?: { lat: number; lng: number };
 }
 
@@ -95,8 +93,6 @@ export async function getLocations(): Promise<CmsLocation[]> {
     phone: item.fields.phone as string,
     hours: item.fields.hours as string[],
     mapsUrl: item.fields.mapsUrl as string,
-    mapsShareUrl: (item.fields.mapsShareUrl as string) || "",
-    embedQuery: (item.fields.embedQuery as string) || "",
     coords:
       item.fields.latitude && item.fields.longitude
         ? {
